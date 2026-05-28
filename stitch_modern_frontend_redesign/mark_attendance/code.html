@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VisionGuard - Face Recognition Attendance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700;800&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @keyframes scan {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        .scan-line {
+            animation: scan 3s linear infinite;
+            background: linear-gradient(to bottom, transparent, #00F5A0, transparent);
+            height: 4px;
+            box-shadow: 0 0 15px #00F5A0;
+        }
+        .glass-inner-glow {
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+        .bg-mesh {
+            background-color: #020617;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(46, 91, 255, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(0, 245, 160, 0.1) 0px, transparent 50%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#00e293",
+                      "surface-container-low": "#131b2e",
+                      "on-secondary-fixed-variant": "#005232",
+                      "on-primary": "#002388",
+                      "glass-surface": "rgba(30, 41, 59, 0.7)",
+                      "tertiary-fixed-dim": "#d1bcff",
+                      "mint-green": "#00F5A0",
+                      "surface-container-highest": "#2d3449",
+                      "inverse-on-surface": "#283044",
+                      "on-tertiary": "#3c0090",
+                      "surface": "#0b1326",
+                      "secondary": "#ceffdf",
+                      "primary-container": "#2e5bff",
+                      "inverse-primary": "#124af0",
+                      "bg-deep": "#020617",
+                      "surface-container-high": "#222a3d",
+                      "status-critical": "#FF4B4B",
+                      "on-primary-fixed-variant": "#0035be",
+                      "error": "#ffb4ab",
+                      "primary-fixed-dim": "#b8c3ff",
+                      "on-secondary-container": "#006b43",
+                      "tertiary-container": "#803eff",
+                      "primary": "#b8c3ff",
+                      "on-error-container": "#ffdad6",
+                      "glass-border": "rgba(255, 255, 255, 0.1)",
+                      "surface-container": "#171f33",
+                      "error-container": "#93000a",
+                      "on-tertiary-fixed": "#23005b",
+                      "electric-blue": "#2E5BFF",
+                      "surface-tint": "#b8c3ff",
+                      "outline-variant": "#434656",
+                      "outline": "#8e90a2",
+                      "on-tertiary-fixed-variant": "#5700c9",
+                      "on-background": "#dae2fd",
+                      "secondary-container": "#01f5a0",
+                      "on-secondary-fixed": "#002111",
+                      "inverse-surface": "#dae2fd",
+                      "surface-dim": "#0b1326",
+                      "on-surface": "#dae2fd",
+                      "background": "#0b1326",
+                      "on-surface-variant": "#c4c5d9",
+                      "on-tertiary-container": "#f5edff",
+                      "on-primary-container": "#efefff",
+                      "secondary-fixed": "#50ffaf",
+                      "on-primary-fixed": "#001356",
+                      "surface-container-lowest": "#060e20",
+                      "on-secondary": "#003921",
+                      "tertiary-fixed": "#e9ddff",
+                      "tertiary": "#d1bcff",
+                      "surface-bright": "#31394d",
+                      "primary-fixed": "#dde1ff",
+                      "surface-variant": "#2d3449",
+                      "on-error": "#690005"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "gutter": "16px",
+                      "container-margin": "24px",
+                      "stack-sm": "8px",
+                      "stack-lg": "32px",
+                      "section-gap": "48px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Hanken Grotesk"],
+                      "label-sm": ["JetBrains Mono"],
+                      "label-xs": ["JetBrains Mono"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "headline-lg-mobile": ["Hanken Grotesk"],
+                      "display-lg": ["Hanken Grotesk"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "label-xs": ["10px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-mesh text-on-background min-h-screen font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-surface backdrop-blur-md border-b border-glass-border shadow-sm">
+<div class="flex justify-between items-center px-container-margin py-4 w-full max-w-md mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-electric-blue" data-icon="fingerprint">fingerprint</span>
+<h1 class="font-headline-md text-headline-md-mobile font-bold text-mint-green">VisionGuard</h1>
+</div>
+<div class="w-10 h-10 rounded-full border border-glass-border overflow-hidden bg-surface-container-highest">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional close-up headshot of a young modern professional in a minimalist tech office setting. Soft cinematic lighting with blue and teal highlights to match the futuristic design system. High-end photography style, clean background, sharp focus on the face." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMmESGqRh8AJ2G5NMO77VYMSTATbu87jCugFzS4D2wD2UU8Y3944a_kCaJVxwHBN2byOyrwnpILYkBC0s7xro3t1WTYHsy7qbShWHvUO7g3acKRtHvvIfGhj9NhXhsQRkQApPolnZhNt-qrHbwYxT9JCCtgs3Erox7-xxxkwSXcBV3tiHAsQbyyo1vqVm8yQQ787f__aNzcLXBV_Q1SBmY_B8smRTv1SvZFF-5eWvTb6P4jC-0qXo4KQ31RLP0SwDYWjH98jezKyVZ"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-container-margin max-w-md mx-auto flex flex-col items-center">
+<!-- Status Header -->
+<div class="w-full mb-stack-lg text-center">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile mb-2">Ready to Scan</h2>
+<p class="font-body-md text-on-surface-variant/80">Position your face within the frame</p>
+</div>
+<!-- Scanner Viewfinder -->
+<div class="relative w-full aspect-square max-w-[320px] rounded-lg border-2 border-glass-border overflow-hidden glass-inner-glow bg-surface-container-lowest mb-stack-lg">
+<!-- Camera Feed Mockup -->
+<img alt="Camera Viewfinder" class="w-full h-full object-cover opacity-60" data-alt="A focused high-resolution portrait of a male face in a dark environment with biometric scanning points subtly overlaid. The lighting is dramatic, coming from the side, emphasizing contours. The visual style is premium, futuristic, and tech-focused with a slight blue tint across the image." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC106upROiUXT-VssVBsa7LSCntoLXox8LxI_yCM1s65SiJdd0EYRbx5NfxyXm47V188objTRaUWRPJ00wUxOcbe3f5Jj9y-q_x80A16z8kLm8k6m5grF4jQBb7z8pureHZ4zsb_trTla68C51GRzVbDIldkdYEvkQTsQWo-tVL0vFD8czqFzmbRgYSaMK7X0Ex5QuYyktjYhVNpRT6n0pw-jYk4Uy7Rr0mgxEdbTOEG3TXKo_gk7AUgrNohe3N1HRUFLN69qk8AjTY"/>
+<!-- Scanning Animation -->
+<div class="absolute inset-0 pointer-events-none">
+<div class="scan-line absolute left-0 right-0 z-10"></div>
+</div>
+<!-- Scanner Corners -->
+<div class="absolute top-6 left-6 w-8 h-8 border-t-4 border-l-4 border-mint-green rounded-tl-sm shadow-[0_0_10px_rgba(0,245,160,0.5)]"></div>
+<div class="absolute top-6 right-6 w-8 h-8 border-t-4 border-r-4 border-mint-green rounded-tr-sm shadow-[0_0_10px_rgba(0,245,160,0.5)]"></div>
+<div class="absolute bottom-6 left-6 w-8 h-8 border-b-4 border-l-4 border-mint-green rounded-bl-sm shadow-[0_0_10px_rgba(0,245,160,0.5)]"></div>
+<div class="absolute bottom-6 right-6 w-8 h-8 border-b-4 border-r-4 border-mint-green rounded-br-sm shadow-[0_0_10px_rgba(0,245,160,0.5)]"></div>
+<!-- Face Focus Indicator -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-48 h-48 border border-white/20 rounded-full animate-pulse flex items-center justify-center">
+<div class="w-44 h-44 border border-white/10 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Primary Action -->
+<button class="w-full h-14 bg-gradient-to-r from-electric-blue to-tertiary-container text-white font-headline-md rounded-xl shadow-[0_0_25px_rgba(46,91,255,0.4)] active:scale-95 transition-all duration-200 mb-section-gap flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" data-icon="face_recognition">face_unlock</span>
+            Scan Face
+        </button>
+<!-- Recent Activity -->
+<section class="w-full">
+<div class="flex justify-between items-center mb-stack-md">
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Recent Activity</h3>
+<span class="font-label-sm text-electric-blue">View All</span>
+</div>
+<div class="space-y-stack-md">
+<!-- Activity Item 1 -->
+<div class="flex items-center gap-4 p-4 rounded-lg bg-glass-surface backdrop-blur-xl border border-glass-border glass-inner-glow hover:bg-surface-container-highest transition-colors duration-200">
+<div class="relative">
+<img alt="Student" class="w-12 h-12 rounded-full object-cover border border-mint-green/30" data-alt="A portrait of a young smiling female student with long hair, wearing casual university attire. The lighting is soft and natural, with a focus on her face. Background is a blurred educational setting with high-end glassmorphic dark mode styling filters applied." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAppFhwn4KhYcDDanhJH--mV2_wXXQNjzg727MVCE9zUqw91WTgvFSbkuJDmFpD3gFCV9hC1-vWKU_soavN5Y-hsZbG_zNXinoTU_WuIcpFpTn571IJ1wJzB8-10b4IldyL-iaCb-sROx_viKKPpf1fZEysjTlXihnJoFgbMi_nlTCCLROOz5kFIH3Emwe-q52H5m7_JdubugqvRywb6Af7Ib0pSmK9pyE9W3THGWQ7SFaNWjDz5a6ZLMR_Kq6U6KlRNwdugPa20buS"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-mint-green rounded-full border-2 border-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[8px] text-surface font-bold" data-icon="check">check</span>
+</div>
+</div>
+<div class="flex-grow">
+<p class="font-body-md font-semibold text-on-surface">Elena Rodriguez</p>
+<p class="font-label-xs text-on-surface-variant/70 uppercase">CS - Section A</p>
+</div>
+<div class="text-right">
+<p class="font-label-sm text-mint-green">09:14 AM</p>
+<p class="font-label-xs text-on-surface-variant/50">Success</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="flex items-center gap-4 p-4 rounded-lg bg-glass-surface backdrop-blur-xl border border-glass-border glass-inner-glow hover:bg-surface-container-highest transition-colors duration-200">
+<div class="relative">
+<img alt="Student" class="w-12 h-12 rounded-full object-cover border border-mint-green/30" data-alt="A portrait of a male student with short hair, wearing a navy polo shirt. The lighting is sharp and clear. The image has a subtle dark blue overlay to maintain visual consistency with a futuristic biometric system aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBc93NVxAZ1RGWNU_PP_JOF3-N4DWY8GLFVSFishOl8yWvJ62yAAvcaCwxEABKWsPljz6Kn08KXDPpQ2N6jv2-R0JTfgjjzVN5Nps2T6hbkNN4zu_hhxCbG5js96Eh10Ssllo1yYAyalbg1fpMw0RE4doUfiX90OPnkxpBIlXUxYN1tPZgv8SAAAqusYnAk4EQOogQTVvzEz41mwJym4Y6PuL_7rePVN24K2ujXGbcVrusBI3e34q7wFEcJRQqul498IjQWHt6B5Lc"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-mint-green rounded-full border-2 border-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[8px] text-surface font-bold" data-icon="check">check</span>
+</div>
+</div>
+<div class="flex-grow">
+<p class="font-body-md font-semibold text-on-surface">Marcus Thompson</p>
+<p class="font-label-xs text-on-surface-variant/70 uppercase">ENG - Section B</p>
+</div>
+<div class="text-right">
+<p class="font-label-sm text-mint-green">09:12 AM</p>
+<p class="font-label-xs text-on-surface-variant/50">Success</p>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="flex items-center gap-4 p-4 rounded-lg bg-glass-surface backdrop-blur-xl border border-glass-border glass-inner-glow hover:bg-surface-container-highest transition-colors duration-200">
+<div class="relative">
+<img alt="Student" class="w-12 h-12 rounded-full object-cover border border-mint-green/30" data-alt="A portrait of a student with a neutral expression, high-fidelity skin textures. Cinematic backlighting in teal and blue tones. The composition is professional, intended for a secure identity verification app interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmFmBrVy6IM1MBwHDeoU73Kr8HIWXPMGAAXewRcu_xz8wZRg9l19bJBm3vfLZN-Yz7jacguAxCj3Mn8TYcQFQAfeoXqri_ilu6fmRmmlPuMRxr3bqwQ6Nanqorho9CotP0ZzmsXfSLHvos41anYqN5l1cvC7LekOe1RvTSnc7bfIXUAD2dvndMA1xR0fWgzhFhsqZ_961UGa8sPW1Ms69Wm0ejf5Kiifg-zadB-XdoEjYrI4KN43_b-iNBhAHhVOAY0_Aq7V3x-lum"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-mint-green rounded-full border-2 border-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[8px] text-surface font-bold" data-icon="check">check</span>
+</div>
+</div>
+<div class="flex-grow">
+<p class="font-body-md font-semibold text-on-surface">Sarah Jenkins</p>
+<p class="font-label-xs text-on-surface-variant/70 uppercase">MKT - Section C</p>
+</div>
+<div class="text-right">
+<p class="font-label-sm text-mint-green">09:08 AM</p>
+<p class="font-label-xs text-on-surface-variant/50">Success</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-glass-surface backdrop-blur-xl border-t border-glass-border rounded-t-lg shadow-lg shadow-electric-blue/10">
+<div class="flex justify-around items-center h-20 px-4 pb-safe w-full max-w-md mx-auto">
+<!-- Active Tab: Scan -->
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-mint-green rounded-xl px-3 py-1 scale-110 transition-transform duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="face_recognition">face_unlock</span>
+<span class="font-label-xs text-label-xs mt-1">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:text-electric-blue transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-xs text-label-xs mt-1">Records</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:text-electric-blue transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard_customize">dashboard_customize</span>
+<span class="font-label-xs text-label-xs mt-1">Admin</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:text-electric-blue transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-xs text-label-xs mt-1">Users</span>
+</a>
+</div>
+</nav>
+<script>
+        // Micro-interaction for scanning button
+        const scanBtn = document.querySelector('button');
+        scanBtn.addEventListener('mousedown', () => {
+            scanBtn.style.transform = 'scale(0.95)';
+            scanBtn.style.opacity = '0.8';
+        });
+        scanBtn.addEventListener('mouseup', () => {
+            scanBtn.style.transform = 'scale(1)';
+            scanBtn.style.opacity = '1';
+        });
+
+        // Simulating sensor pulses on the background
+        const createPulse = () => {
+            const pulse = document.createElement('div');
+            pulse.className = 'fixed rounded-full bg-electric-blue/5 pointer-events-none -z-10 animate-ping';
+            const size = Math.random() * 300 + 100;
+            pulse.style.width = `${size}px`;
+            pulse.style.height = `${size}px`;
+            pulse.style.left = `${Math.random() * 100}vw`;
+            pulse.style.top = `${Math.random() * 100}vh`;
+            document.body.appendChild(pulse);
+            setTimeout(() => pulse.remove(), 3000);
+        };
+
+        setInterval(createPulse, 2000);
+    </script>
+</body></html>

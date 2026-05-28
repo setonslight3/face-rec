@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>VisionGuard | Attendance Records</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#00e293",
+                    "surface-container-low": "#131b2e",
+                    "on-secondary-fixed-variant": "#005232",
+                    "on-primary": "#002388",
+                    "glass-surface": "rgba(30, 41, 59, 0.7)",
+                    "tertiary-fixed-dim": "#d1bcff",
+                    "mint-green": "#00F5A0",
+                    "surface-container-highest": "#2d3449",
+                    "inverse-on-surface": "#283044",
+                    "on-tertiary": "#3c0090",
+                    "surface": "#0b1326",
+                    "secondary": "#ceffdf",
+                    "primary-container": "#2e5bff",
+                    "inverse-primary": "#124af0",
+                    "bg-deep": "#020617",
+                    "surface-container-high": "#222a3d",
+                    "status-critical": "#FF4B4B",
+                    "on-primary-fixed-variant": "#0035be",
+                    "error": "#ffb4ab",
+                    "primary-fixed-dim": "#b8c3ff",
+                    "on-secondary-container": "#006b43",
+                    "tertiary-container": "#803eff",
+                    "primary": "#b8c3ff",
+                    "on-error-container": "#ffdad6",
+                    "glass-border": "rgba(255, 255, 255, 0.1)",
+                    "surface-container": "#171f33",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed": "#23005b",
+                    "electric-blue": "#2E5BFF",
+                    "surface-tint": "#b8c3ff",
+                    "outline-variant": "#434656",
+                    "outline": "#8e90a2",
+                    "on-tertiary-fixed-variant": "#5700c9",
+                    "on-background": "#dae2fd",
+                    "secondary-container": "#01f5a0",
+                    "on-secondary-fixed": "#002111",
+                    "inverse-surface": "#dae2fd",
+                    "surface-dim": "#0b1326",
+                    "on-surface": "#dae2fd",
+                    "background": "#0b1326",
+                    "on-surface-variant": "#c4c5d9",
+                    "on-tertiary-container": "#f5edff",
+                    "on-primary-container": "#efefff",
+                    "secondary-fixed": "#50ffaf",
+                    "on-primary-fixed": "#001356",
+                    "surface-container-lowest": "#060e20",
+                    "on-secondary": "#003921",
+                    "tertiary-fixed": "#e9ddff",
+                    "tertiary": "#d1bcff",
+                    "surface-bright": "#31394d",
+                    "primary-fixed": "#dde1ff",
+                    "surface-variant": "#2d3449",
+                    "on-error": "#690005"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "gutter": "16px",
+                    "container-margin": "24px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "section-gap": "48px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Hanken Grotesk"],
+                    "label-sm": ["JetBrains Mono"],
+                    "label-xs": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "label-xs": ["10px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .outer-glow-blue {
+            box-shadow: 0 0 20px rgba(46, 91, 255, 0.25);
+        }
+        .outer-glow-mint {
+            box-shadow: 0 0 20px rgba(0, 245, 160, 0.2);
+        }
+        .radial-progress {
+            background: radial-gradient(closest-side, #0b1326 79%, transparent 80% 100%),
+                        conic-gradient(#00F5A0 94.2%, #131b2e 0);
+        }
+        .scanline {
+            height: 2px;
+            background: #00F5A0;
+            box-shadow: 0 0 8px #00F5A0;
+            animation: scan 3s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-bg-deep text-on-surface font-body-md selection:bg-mint-green selection:text-bg-deep min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-surface backdrop-blur-md border-b border-glass-border shadow-sm">
+<div class="flex justify-between items-center px-container-margin py-4 w-full max-w-md mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-mint-green text-2xl" data-icon="fingerprint">fingerprint</span>
+<h1 class="font-headline-md text-headline-md-mobile font-bold text-mint-green">VisionGuard</h1>
+</div>
+<div class="w-10 h-10 rounded-full border border-glass-border overflow-hidden bg-surface-container-high flex items-center justify-center">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a futuristic security administrator with sharp, clean features. He is set against a dark, minimalist background with subtle blue rim lighting that emphasizes a high-tech, premium aesthetic. The mood is serious and professional, reflecting a secure biometrics environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL0altOmYrEox9UmLimAQZGxB01-SHbXHl8YkVT7nWf1XbYdh6LOIi3BLhW2eDj_Ioa3zN-mAjxAQ2V7jK9ZrSnEjWJlbsA2DT_aDaj0xNvyac9yOj5wYD9-Troto2hd79OziB-kAH4XERc9gmPNrVqL-72FRkjs0XXzUqg-aKQEHIGq3cbhYAZs22-4ipcBnfNhOyHkMrgK1EWu6iaO3myXfF34XTx8eaVNrAssMTEARa50zUd-4KlcyOSuGHcQvSDQzqAwXO35Op"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-container-margin max-w-md mx-auto space-y-stack-lg">
+<!-- Summary Section -->
+<section class="space-y-gutter">
+<div class="glass-panel p-6 rounded-lg space-y-gutter relative overflow-hidden">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface">Daily Summary</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant">OCT 24, 2023</span>
+</div>
+<div class="flex items-center gap-6">
+<!-- Radial Chart -->
+<div class="relative w-32 h-32 flex-shrink-0">
+<div class="radial-progress w-full h-full rounded-full flex items-center justify-center">
+<div class="text-center">
+<span class="block font-headline-md text-headline-md text-mint-green">94%</span>
+<span class="block font-label-xs text-label-xs text-on-surface-variant uppercase">Rate</span>
+</div>
+</div>
+</div>
+<!-- Quick Stats -->
+<div class="flex-1 space-y-stack-sm">
+<div class="glass-panel bg-primary-container/10 p-3 rounded-DEFAULT border-none">
+<span class="block font-label-xs text-label-xs text-on-surface-variant">OVERALL ATTENDANCE</span>
+<span class="font-headline-md text-headline-md text-electric-blue">High Performance</span>
+</div>
+<div class="flex gap-2">
+<div class="flex-1 bg-surface-container-low p-2 rounded-DEFAULT border border-glass-border">
+<span class="block font-label-xs text-label-xs text-on-surface-variant">TREND</span>
+<span class="text-mint-green flex items-center gap-1 font-label-sm">
+<span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span> +2.4%
+                                </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Mini Stat Cards -->
+<div class="grid grid-cols-2 gap-stack-md">
+<div class="glass-panel p-4 rounded-lg flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-mint-green" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<span class="block font-label-xs text-label-xs text-on-surface-variant">PRESENT</span>
+<span class="font-headline-md text-headline-md text-on-surface">1,284</span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-lg flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-error-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-status-critical" data-icon="cancel">cancel</span>
+</div>
+<div>
+<span class="block font-label-xs text-label-xs text-on-surface-variant">ABSENT</span>
+<span class="font-headline-md text-headline-md text-on-surface">82</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Records List Section -->
+<section class="space-y-stack-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Recent Logs</h3>
+<button class="text-electric-blue font-label-sm text-label-sm hover:underline">View All</button>
+</div>
+<div class="space-y-3">
+<!-- Record Item 1 -->
+<div class="glass-panel p-4 rounded-lg flex items-center gap-4 hover:bg-surface-container-highest transition-colors">
+<img alt="Student" class="w-12 h-12 rounded-full object-cover" data-alt="A close-up portrait of a student with a clean-cut aesthetic, wearing a modern charcoal hoodie. The lighting is soft and cinematic, casting gentle shadows across his face against a dark architectural background. The overall style is premium and high-fidelity, matching a sophisticated digital security interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3uoKGvZmbx7jr5SPdUX8V1JdE5UVLR9PdvI79SLYqJcXvxDUsFjJcCf9_PaV9rTpY_n8fM8OEnU-8h70MJ6UUlUAGLRj0e_QfF94Hti93DMl6Cx5yUme1ycHP7xGH8DqTCH0sPm9WcNTmRFq29Er2rqJ9T2d2gGSCv2ohHbFB8mAaKULWLU__yzfdqWOGuGN_bQEz9TIJznBOxfoXpkSuMJ9d_I8FtOlxgfqPBHo4YbHnsx43tcAWPzrl3Vepb2dWdEZL10S5qKSS"/>
+<div class="flex-1 min-w-0">
+<h4 class="font-body-md text-on-surface font-semibold truncate">Marcus Thorne</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">CS-402 • 09:12 AM</span>
+</div>
+<div class="px-3 py-1 rounded-full bg-secondary-container/20 border border-secondary-container/30">
+<span class="font-label-xs text-label-xs text-mint-green uppercase">Present</span>
+</div>
+</div>
+<!-- Record Item 2 -->
+<div class="glass-panel p-4 rounded-lg flex items-center gap-4 hover:bg-surface-container-highest transition-colors">
+<img alt="Student" class="w-12 h-12 rounded-full object-cover" data-alt="A high-resolution portrait of a young woman with a focused expression, styled in a minimalist navy blazer. The background is a deep, blurred indigo with subtle technical overlays like digital noise and light flares. The mood is intelligent and secure, fitting for a biometric authentication record list." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_bvcq15_kwlfDpKyFGpAS7-llJN_5nJ0Oa0VIcQbxQZVmm61lOjOVM0zkgHzrhzfj2iiXTT5pIpTuea_xeLCvmvWngATu0WbXZxxFBTnRj-N7LA6XISuZQUbmmMIFudlu2svSldhhKjWrauEzOIbbuoLJM4x3QSS90ETrZdthWnuaI4ffDnWGduw4ycukpzH8faLA5PzAfKkuekIaCdHEe1o-XENpao8-0Fo6XCM78_kZ53zqdPdWmrFbP3Skmn6ZdqsSWynXdL0v"/>
+<div class="flex-1 min-w-0">
+<h4 class="font-body-md text-on-surface font-semibold truncate">Elena Vance</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">ME-201 • 09:15 AM</span>
+</div>
+<div class="px-3 py-1 rounded-full bg-error-container/20 border border-error-container/30">
+<span class="font-label-xs text-label-xs text-status-critical uppercase">Absent</span>
+</div>
+</div>
+<!-- Record Item 3 -->
+<div class="glass-panel p-4 rounded-lg flex items-center gap-4 hover:bg-surface-container-highest transition-colors">
+<img alt="Student" class="w-12 h-12 rounded-full object-cover" data-alt="A sharp, detailed photograph of a young man with a slight smile, wearing a technical grey turtleneck. The shot is taken with a shallow depth of field against a dark, moody background illuminated by cool-toned ambient light. The style is modern, professional, and integrated into a premium security app design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBndu9j0erfOphvrWHhhautAeFT3CKKhwDlvFUtBEoiSJhsP2Vf5qcQguP_viSUjsGQ0nXOHX9hLAqGRw78PISMwZisH7p_IvVi-Nri1Ppbh_cpfRTkUOHhkiT9kOwMm1ih2TwYyhCujCbN13fd_E60ZeIjv5pWJRkW6vnjlzZJjhkPFm8ZjQ6ZaCisj4LIAdszBwsDLHj7XTOnRBnc0SCR6stNoXPrE0xfmszLhXJmOfnyvb1rWxXAWxeGYf_7XQtnfHJ3buJb8vlc"/>
+<div class="flex-1 min-w-0">
+<h4 class="font-body-md text-on-surface font-semibold truncate">Julian Grey</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">CS-402 • 09:18 AM</span>
+</div>
+<div class="px-3 py-1 rounded-full bg-secondary-container/20 border border-secondary-container/30">
+<span class="font-label-xs text-label-xs text-mint-green uppercase">Present</span>
+</div>
+</div>
+<!-- Record Item 4 -->
+<div class="glass-panel p-4 rounded-lg flex items-center gap-4 hover:bg-surface-container-highest transition-colors">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center border border-glass-border">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="person">person</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-body-md text-on-surface font-semibold truncate">Sarah Jenkins</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">LA-105 • 09:22 AM</span>
+</div>
+<div class="px-3 py-1 rounded-full bg-secondary-container/20 border border-secondary-container/30">
+<span class="font-label-xs text-label-xs text-mint-green uppercase">Present</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Filter Button -->
+<button class="fixed bottom-24 right-container-margin w-14 h-14 bg-electric-blue text-white rounded-xl flex items-center justify-center shadow-lg shadow-electric-blue/40 active:scale-95 transition-all z-40 group">
+<span class="material-symbols-outlined text-2xl group-hover:rotate-12 transition-transform" data-icon="tune">tune</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-glass-surface backdrop-blur-xl border-t border-glass-border shadow-lg shadow-electric-blue/10">
+<div class="flex justify-around items-center h-20 px-4 pb-safe w-full max-w-md mx-auto">
+<button class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:text-electric-blue">
+<span class="material-symbols-outlined" data-icon="face_recognition">face_unlock</span>
+<span class="font-label-xs text-label-xs">Scan</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container/20 text-mint-green rounded-xl px-3 py-1 scale-110 transition-transform duration-300 ease-out">
+<span class="material-symbols-outlined" data-icon="calendar_today" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="font-label-xs text-label-xs">Records</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:text-electric-blue">
+<span class="material-symbols-outlined" data-icon="dashboard_customize">dashboard_customize</span>
+<span class="font-label-xs text-label-xs">Admin</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:text-electric-blue">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-xs text-label-xs">Users</span>
+</button>
+</div>
+</nav>
+<script>
+        // Micro-interaction: Subtle parallax effect on stats cards
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.glass-panel');
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
+            
+            cards.forEach(card => {
+                card.style.transform = `translateX(${x}px) translateY(${y}px)`;
+            });
+        });
+
+        // Pull to refresh simulation / atmospheric interaction
+        let startY;
+        document.addEventListener('touchstart', e => startY = e.touches[0].pageY);
+        document.addEventListener('touchmove', e => {
+            const y = e.touches[0].pageY;
+            if (window.scrollY === 0 && y > startY) {
+                // Potential pull-to-refresh visual trigger
+            }
+        });
+    </script>
+</body></html>

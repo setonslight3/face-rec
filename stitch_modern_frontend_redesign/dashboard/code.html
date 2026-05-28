@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>VisionGuard Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#00e293",
+                    "surface-container-low": "#131b2e",
+                    "on-secondary-fixed-variant": "#005232",
+                    "on-primary": "#002388",
+                    "glass-surface": "rgba(30, 41, 59, 0.7)",
+                    "tertiary-fixed-dim": "#d1bcff",
+                    "mint-green": "#00F5A0",
+                    "surface-container-highest": "#2d3449",
+                    "inverse-on-surface": "#283044",
+                    "on-tertiary": "#3c0090",
+                    "surface": "#0b1326",
+                    "secondary": "#ceffdf",
+                    "primary-container": "#2e5bff",
+                    "inverse-primary": "#124af0",
+                    "bg-deep": "#020617",
+                    "surface-container-high": "#222a3d",
+                    "status-critical": "#FF4B4B",
+                    "on-primary-fixed-variant": "#0035be",
+                    "error": "#ffb4ab",
+                    "primary-fixed-dim": "#b8c3ff",
+                    "on-secondary-container": "#006b43",
+                    "tertiary-container": "#803eff",
+                    "primary": "#b8c3ff",
+                    "on-error-container": "#ffdad6",
+                    "glass-border": "rgba(255, 255, 255, 0.1)",
+                    "surface-container": "#171f33",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed": "#23005b",
+                    "electric-blue": "#2E5BFF",
+                    "surface-tint": "#b8c3ff",
+                    "outline-variant": "#434656",
+                    "outline": "#8e90a2",
+                    "on-tertiary-fixed-variant": "#5700c9",
+                    "on-background": "#dae2fd",
+                    "secondary-container": "#01f5a0",
+                    "on-secondary-fixed": "#002111",
+                    "inverse-surface": "#dae2fd",
+                    "surface-dim": "#0b1326",
+                    "on-surface": "#dae2fd",
+                    "background": "#0b1326",
+                    "on-surface-variant": "#c4c5d9",
+                    "on-tertiary-container": "#f5edff",
+                    "on-primary-container": "#efefff",
+                    "secondary-fixed": "#50ffaf",
+                    "on-primary-fixed": "#001356",
+                    "surface-container-lowest": "#060e20",
+                    "on-secondary": "#003921",
+                    "tertiary-fixed": "#e9ddff",
+                    "tertiary": "#d1bcff",
+                    "surface-bright": "#31394d",
+                    "primary-fixed": "#dde1ff",
+                    "surface-variant": "#2d3449",
+                    "on-error": "#690005"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "gutter": "16px",
+                    "container-margin": "24px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "section-gap": "48px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Hanken Grotesk"],
+                    "label-sm": ["JetBrains Mono"],
+                    "label-xs": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "label-xs": ["10px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .scanner-glow {
+            box-shadow: 0 0 20px rgba(0, 245, 160, 0.2);
+        }
+        .chart-line-gradient {
+            background: linear-gradient(180deg, rgba(46, 91, 255, 0.2) 0%, rgba(46, 91, 255, 0) 100%);
+        }
+        body {
+            background-color: #020617;
+            color: #dae2fd;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased selection:bg-mint-green selection:text-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-surface backdrop-blur-md border-b border-glass-border shadow-sm">
+<div class="flex justify-between items-center px-container-margin py-4 w-full max-w-4xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-electric-blue" data-icon="fingerprint">fingerprint</span>
+<h1 class="font-headline-md text-headline-md-mobile font-bold text-mint-green">VisionGuard</h1>
+</div>
+<div class="relative group">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-electric-blue/30 hover:border-electric-blue transition-all duration-300">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="A professional high-fidelity 3D avatar of a tech executive in a dark digital setting. The lighting is dominated by soft electric blue and mint green tones, reflecting off a polished glass surface. The overall atmosphere is premium, futuristic, and highly secure, consistent with a high-end biometric security interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqZEWvifIy_m8PfOt2xfJJ4NEghKc02fRZUtank8jduav0HBUFBodWqcXzbc-Bw6tk-T9uTtWRXjfTH704lG2wuljCcm_EeGPAepnp9Xg2wyXPWkP1Uiw1JL1rBjqR8hqfOfyFLF55eEG6OWSkOnTXA4fT4wDwbY-daCfTJMmeEiCSHbikxI3sixzMzM2ULwveVTTh_YFl33B2NORCy_AVICGW6hz-KbxAHAaH97_aSkNXxA_woPI2BLjC-M4UN77w7-aP3gdZPt6D"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-container-margin max-w-4xl mx-auto space-y-stack-lg">
+<!-- Header Section -->
+<section class="space-y-2">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">System Overview</h2>
+<p class="font-body-md text-on-surface-variant/80">Real-time biometrics &amp; analytics dashboard.</p>
+</section>
+<!-- Stats Grid (Bento Style) -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="glass-panel p-4 rounded-xl flex flex-col justify-between h-32 hover:bg-surface-container-highest transition-colors duration-300">
+<span class="material-symbols-outlined text-mint-green" data-icon="person_check">person_check</span>
+<div>
+<div class="text-mint-green font-label-xs">ACTIVE TODAY</div>
+<div class="font-headline-md text-on-surface">1,284</div>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl flex flex-col justify-between h-32 hover:bg-surface-container-highest transition-colors duration-300">
+<span class="material-symbols-outlined text-electric-blue" data-icon="security">security</span>
+<div>
+<div class="text-electric-blue font-label-xs">AUTH RATE</div>
+<div class="font-headline-md text-on-surface">99.8%</div>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl flex flex-col justify-between h-32 md:col-span-2 hover:bg-surface-container-highest transition-colors duration-300">
+<span class="material-symbols-outlined text-tertiary" data-icon="cloud_sync">cloud_sync</span>
+<div class="flex justify-between items-end">
+<div>
+<div class="text-tertiary font-label-xs">DB STATUS</div>
+<div class="font-headline-md text-on-surface">Synced</div>
+</div>
+<div class="font-label-xs text-on-surface-variant mb-1">Last: 2m ago</div>
+</div>
+</div>
+</div>
+<!-- Charts Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<!-- Line Graph: Attendance Trends -->
+<div class="glass-panel p-6 rounded-lg space-y-4">
+<div class="flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Attendance Trends</h3>
+<span class="material-symbols-outlined text-on-surface-variant/50" data-icon="trending_up">trending_up</span>
+</div>
+<div class="relative h-48 w-full flex items-end justify-between gap-1">
+<!-- Simple SVG Line Visualization -->
+<svg class="absolute inset-0 h-full w-full" preserveaspectratio="none">
+<path d="M0 160 Q 50 140, 100 150 T 200 80 T 300 110 T 400 40" fill="none" stroke="#2E5BFF" stroke-width="3"></path>
+<path d="M0 160 Q 50 140, 100 150 T 200 80 T 300 110 T 400 40 L 400 192 L 0 192 Z" fill="url(#grad1)" opacity="0.2"></path>
+<defs>
+<lineargradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#2E5BFF;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#2E5BFF;stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- X-Axis Labels -->
+<div class="absolute bottom-0 left-0 right-0 flex justify-between px-1">
+<span class="font-label-xs text-on-surface-variant">Mon</span>
+<span class="font-label-xs text-on-surface-variant">Wed</span>
+<span class="font-label-xs text-on-surface-variant">Fri</span>
+<span class="font-label-xs text-on-surface-variant">Sun</span>
+</div>
+</div>
+</div>
+<!-- Bar Chart: Course Participation -->
+<div class="glass-panel p-6 rounded-lg space-y-4">
+<div class="flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Course Participation</h3>
+<span class="material-symbols-outlined text-on-surface-variant/50" data-icon="bar_chart">bar_chart</span>
+</div>
+<div class="h-48 flex items-end justify-between gap-3 px-2">
+<div class="w-full bg-mint-green/20 rounded-t-sm relative transition-all duration-500 hover:bg-mint-green/40" style="height: 60%;">
+<div class="absolute inset-x-0 top-0 h-1 bg-mint-green"></div>
+</div>
+<div class="w-full bg-mint-green/20 rounded-t-sm relative transition-all duration-500 hover:bg-mint-green/40" style="height: 85%;">
+<div class="absolute inset-x-0 top-0 h-1 bg-mint-green"></div>
+</div>
+<div class="w-full bg-mint-green/20 rounded-t-sm relative transition-all duration-500 hover:bg-mint-green/40" style="height: 45%;">
+<div class="absolute inset-x-0 top-0 h-1 bg-mint-green"></div>
+</div>
+<div class="w-full bg-mint-green/20 rounded-t-sm relative transition-all duration-500 hover:bg-mint-green/40" style="height: 75%;">
+<div class="absolute inset-x-0 top-0 h-1 bg-mint-green"></div>
+</div>
+<div class="w-full bg-mint-green/20 rounded-t-sm relative transition-all duration-500 hover:bg-mint-green/40" style="height: 95%;">
+<div class="absolute inset-x-0 top-0 h-1 bg-mint-green"></div>
+</div>
+</div>
+<div class="flex justify-between font-label-xs text-on-surface-variant px-1">
+<span>CS1</span><span>CS2</span><span>DS</span><span>AI</span><span>UX</span>
+</div>
+</div>
+</section>
+<!-- Quick Actions Section -->
+<section class="space-y-gutter">
+<h3 class="font-headline-md text-headline-md text-on-surface px-1">System Actions</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Add New Course -->
+<button class="glass-panel p-5 rounded-lg flex items-center gap-4 hover:bg-primary-container/10 active:scale-95 transition-all duration-200 text-left group">
+<div class="w-12 h-12 rounded-full bg-electric-blue/20 flex items-center justify-center text-electric-blue group-hover:bg-electric-blue group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="library_add">library_add</span>
+</div>
+<div>
+<div class="font-body-md font-semibold text-on-surface">Add New Course</div>
+<div class="font-label-xs text-on-surface-variant">Initialize curriculum</div>
+</div>
+</button>
+<!-- Register Student -->
+<button class="glass-panel p-5 rounded-lg flex items-center gap-4 hover:bg-secondary-container/10 active:scale-95 transition-all duration-200 text-left group">
+<div class="w-12 h-12 rounded-full bg-mint-green/20 flex items-center justify-center text-mint-green group-hover:bg-mint-green group-hover:text-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+</div>
+<div>
+<div class="font-body-md font-semibold text-on-surface">Register Student</div>
+<div class="font-label-xs text-on-surface-variant">Biometric enrollment</div>
+</div>
+</button>
+<!-- Manage Database -->
+<button class="glass-panel p-5 rounded-lg flex items-center gap-4 hover:bg-surface-container-highest active:scale-95 transition-all duration-200 text-left group">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant group-hover:bg-white group-hover:text-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+</div>
+<div>
+<div class="font-body-md font-semibold text-on-surface">Manage Database</div>
+<div class="font-label-xs text-on-surface-variant">Backups &amp; Integrity</div>
+</div>
+</button>
+</div>
+</section>
+<!-- Identity Card Preview (As per guidelines) -->
+<section class="glass-panel p-6 rounded-lg border-l-4 border-mint-green">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-sm text-mint-green">LATEST ENROLLMENT</span>
+<span class="font-label-xs text-on-surface-variant">ID: VG-90210</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="w-20 h-20 rounded-full border-2 border-mint-green p-1">
+<img alt="Recent Student" class="w-full h-full rounded-full object-cover bg-surface-container" data-alt="A futuristic identity portrait of a young person in a pixel-art style, framed by a circular holographic mint green border. The background consists of deep blue architectural digital grids, giving the impression of a high-security biometric registration profile within a premium dark-mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfA-Rsbq5QnUpXLp6ER5dbCVbS1D1XqeP0ba4bcd4xmX4pR2Cpt6tPy0-sEswZ3nTo-VwPtFoxjFMVW9P9j5oCNjOQE_-fJysVCVW6cYm417F6oKRg5OehjeJO1eBw1DWF7BTici96m8EMne64IKpIdWX4QHZ9XmhLwUYqrYLbMnjaOkxqoOPTpArX7QgUfqGsavbn274OeVVbYCC32gjiP6bqaSBSU-j1ThJhNBc464lWqWQQOe-nl0EbmrFBIt6ghRwuhey6sTDh"/>
+</div>
+<div class="space-y-1">
+<div class="font-headline-md text-on-surface">Alex Rivera</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-mint-green/10 text-mint-green font-label-xs rounded-full">FACIAL REGISTERED</span>
+<span class="px-3 py-1 bg-electric-blue/10 text-electric-blue font-label-xs rounded-full">LEVEL 4 CLEARANCE</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-glass-surface backdrop-blur-xl border-t border-glass-border rounded-t-lg shadow-lg shadow-electric-blue/10">
+<div class="flex justify-around items-center h-20 px-4 pb-safe w-full max-w-4xl mx-auto">
+<button class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:text-electric-blue transition-colors">
+<span class="material-symbols-outlined" data-icon="face_recognition">face_unlock</span>
+<span class="font-label-xs text-label-xs">Scan</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:text-electric-blue transition-colors">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-xs text-label-xs">Records</span>
+</button>
+<!-- Admin is active -->
+<button class="flex flex-col items-center justify-center bg-primary-container/20 text-mint-green rounded-xl px-3 py-1 scale-110 transition-transform duration-300 ease-out">
+<span class="material-symbols-outlined" data-icon="dashboard_customize" style="font-variation-settings: 'FILL' 1;">dashboard_customize</span>
+<span class="font-label-xs text-label-xs">Admin</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:text-electric-blue transition-colors">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-xs text-label-xs">Users</span>
+</button>
+</div>
+</nav>
+<script>
+        // Micro-interactions for the scanner effect on buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                btn.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+        });
+
+        // Simple atmospheric scan line effect for the whole page
+        const scanLine = document.createElement('div');
+        scanLine.style.position = 'fixed';
+        scanLine.style.top = '0';
+        scanLine.style.left = '0';
+        scanLine.style.width = '100%';
+        scanLine.style.height = '2px';
+        scanLine.style.background = 'linear-gradient(90deg, transparent, rgba(0, 245, 160, 0.1), transparent)';
+        scanLine.style.zIndex = '100';
+        scanLine.style.pointerEvents = 'none';
+        document.body.appendChild(scanLine);
+
+        let pos = 0;
+        function animateScan() {
+            pos += 1;
+            if (pos > window.innerHeight) pos = -10;
+            scanLine.style.transform = `translateY(${pos}px)`;
+            requestAnimationFrame(animateScan);
+        }
+        animateScan();
+    </script>
+</body></html>

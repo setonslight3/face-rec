@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#00e293",
+                    "surface-container-low": "#131b2e",
+                    "on-secondary-fixed-variant": "#005232",
+                    "on-primary": "#002388",
+                    "glass-surface": "rgba(30, 41, 59, 0.7)",
+                    "tertiary-fixed-dim": "#d1bcff",
+                    "mint-green": "#00F5A0",
+                    "surface-container-highest": "#2d3449",
+                    "inverse-on-surface": "#283044",
+                    "on-tertiary": "#3c0090",
+                    "surface": "#0b1326",
+                    "secondary": "#ceffdf",
+                    "primary-container": "#2e5bff",
+                    "inverse-primary": "#124af0",
+                    "bg-deep": "#020617",
+                    "surface-container-high": "#222a3d",
+                    "status-critical": "#FF4B4B",
+                    "on-primary-fixed-variant": "#0035be",
+                    "error": "#ffb4ab",
+                    "primary-fixed-dim": "#b8c3ff",
+                    "on-secondary-container": "#006b43",
+                    "tertiary-container": "#803eff",
+                    "primary": "#b8c3ff",
+                    "on-error-container": "#ffdad6",
+                    "glass-border": "rgba(255, 255, 255, 0.1)",
+                    "surface-container": "#171f33",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed": "#23005b",
+                    "electric-blue": "#2E5BFF",
+                    "surface-tint": "#b8c3ff",
+                    "outline-variant": "#434656",
+                    "outline": "#8e90a2",
+                    "on-tertiary-fixed-variant": "#5700c9",
+                    "on-background": "#dae2fd",
+                    "secondary-container": "#01f5a0",
+                    "on-secondary-fixed": "#002111",
+                    "inverse-surface": "#dae2fd",
+                    "surface-dim": "#0b1326",
+                    "on-surface": "#dae2fd",
+                    "background": "#0b1326",
+                    "on-surface-variant": "#c4c5d9",
+                    "on-tertiary-container": "#f5edff",
+                    "on-primary-container": "#efefff",
+                    "secondary-fixed": "#50ffaf",
+                    "on-primary-fixed": "#001356",
+                    "surface-container-lowest": "#060e20",
+                    "on-secondary": "#003921",
+                    "tertiary-fixed": "#e9ddff",
+                    "tertiary": "#d1bcff",
+                    "surface-bright": "#31394d",
+                    "primary-fixed": "#dde1ff",
+                    "surface-variant": "#2d3449",
+                    "on-error": "#690005"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "gutter": "16px",
+                    "container-margin": "24px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "section-gap": "48px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Hanken Grotesk"],
+                    "label-sm": ["JetBrains Mono"],
+                    "label-xs": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "label-xs": ["10px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #020617;
+            color: #dae2fd;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .scanner-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00F5A0, transparent);
+            box-shadow: 0 0 15px #00F5A0;
+            animation: scan 3s infinite ease-in-out;
+        }
+        @keyframes scan {
+            0%, 100% { top: 0%; }
+            50% { top: 100%; }
+        }
+        .inner-glow {
+            box-shadow: inset 0 0 12px rgba(46, 91, 255, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-surface backdrop-blur-md border-b border-glass-border shadow-sm">
+<div class="flex justify-between items-center px-container-margin py-4 w-full max-w-md mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-electric-blue" data-icon="fingerprint">fingerprint</span>
+<h1 class="font-headline-md text-headline-md-mobile font-bold text-mint-green">VisionGuard</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-glass-border">
+<img alt="Admin" class="w-full h-full object-cover" data-alt="A professional headshot of a modern security administrator in a high-tech environment. The lighting is dramatic with cool blue tones and sharp highlights, reflecting the futuristic aesthetic of the VisionGuard system. The background shows blurred server racks and digital interfaces, emphasizing a secure and premium corporate setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfIxSklSs0wGT7cLj6p9Ij_XL1-rsOcpYHwj9-hL6r_vJHcVTTsCp4V54gJkZuutbCM1JFzj4YhQehiIj06v9xcNvK3B4vO0tkGLj0OA6JCrwbanmnYwzg6aZPgM1NVPtV8H9GTOOjYd_wLhtRrBACSwrNnwVDecSSyznTKj7DiTWx7-E91nPoeVpNmJT3NFvxJAgKuUvjjF2zWIvF_ttfAnExjXDeJ-CN-KhfcF-TJ85eyLG4oQMkawOYW5X7phwSeYek-TABfkAR"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 px-container-margin w-full max-w-md mx-auto">
+<!-- Search & Filter Section -->
+<div class="flex gap-stack-md mb-stack-lg">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50" data-icon="search">search</span>
+<input class="w-full bg-glass-surface border border-glass-border rounded-xl py-3.5 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-electric-blue focus:ring-1 focus:ring-electric-blue/50 transition-all font-body-md" placeholder="Search students..." type="text"/>
+</div>
+<button class="glass-card p-3.5 rounded-xl flex items-center justify-center text-mint-green hover:bg-surface-container-highest transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+</button>
+</div>
+<!-- Student Grid -->
+<div class="grid grid-cols-1 gap-stack-md" id="student-list">
+<!-- Student Card 1 -->
+<div class="glass-card p-4 rounded-lg flex items-center gap-4 hover:scale-[1.02] active:opacity-80 active:scale-95 transition-all cursor-pointer" onclick="openDetails('Elena Rodriguez', 'STU-9402', 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&amp;fit=crop&amp;q=80&amp;w=150')">
+<div class="relative">
+<img alt="Student" class="w-16 h-16 rounded-full object-cover border-2 border-mint-green/30" data-alt="A high-resolution close-up portrait of a young woman with a friendly but professional expression. The photo is taken against a clean, minimal dark background with soft studio lighting that accentuates facial features. The style is modern and polished, suitable for a premium biometric identification system profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnyb5wpvMdTSc6Gr6lyxjj9xynmB_vYZtk-LdY5inZizvsJgnT8qnLI-Koe8hLEgBYd_pTfhjD7Y-vl7H9sVDkfHaI45G0I8trVO6RLM7YLkEXFkcs7b0dCzz7HBVFgoWVSbiyD82ajLEiadPd80qogm4aibl21nTubGiTflVsBhD2eoRsuBsnqzf8WM2MfUE6vFU4m0_p-1_eQGa-BCENJs8TmDjpRSkVVI7zCB5Xf5RVw8H1cKNV8W5wa0Wrwhhf62mV1XmM5xjH"/>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-mint-green border-2 border-surface rounded-full"></div>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-[18px] text-on-surface">Elena Rodriguez</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant/70">ID: STU-9402</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Student Card 2 -->
+<div class="glass-card p-4 rounded-lg flex items-center gap-4 hover:scale-[1.02] active:opacity-80 active:scale-95 transition-all cursor-pointer" onclick="openDetails('Marcus Chen', 'STU-8821', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&amp;fit=crop&amp;q=80&amp;w=150')">
+<div class="relative">
+<img alt="Student" class="w-16 h-16 rounded-full object-cover border-2 border-electric-blue/30" data-alt="A sharp, detailed portrait of a young man with a slight smile. The aesthetic is tech-focused with subtle teal and blue highlights in the background. The lighting is balanced and clean, emphasizing clear biometric details as required for a secure university identification system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCliaAn6GGqDyT75JW6EoayXAoj1peJm87BPgzRE3jidJmX4OpQt5HqWgoIOgTuODphi7HRFbnVLl2bqxWDRQfTUDWwffUyNYCs-if5SXvCE4sG7LqQyVGlDOs0oaScFj9GW8dfU198IO05KUE4cCXnZtPj9JfbIsjUbZk7vzR9L8TEcorL4MiqLgP765l5NIRNR582H7NvM5xkibAdYqQ9kEC05LxRU4ThlaBxF9JdH90F3x4UvhAsZnIqsaGMZPHT8vG-91GPX4lJ"/>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-mint-green border-2 border-surface rounded-full"></div>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-[18px] text-on-surface">Marcus Chen</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant/70">ID: STU-8821</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Student Card 3 -->
+<div class="glass-card p-4 rounded-lg flex items-center gap-4 hover:scale-[1.02] active:opacity-80 active:scale-95 transition-all cursor-pointer" onclick="openDetails('Sarah Jenkins', 'STU-7740', 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&amp;fit=crop&amp;q=80&amp;w=150')">
+<div class="relative">
+<img alt="Student" class="w-16 h-16 rounded-full object-cover border-2 border-mint-green/30" data-alt="A professional studio portrait of a young woman with a neutral expression for biometric records. The background is a sophisticated deep navy with soft bokeh effects. High-fidelity textures and crisp lighting define this image, fitting the premium and secure look of the VisionGuard identity management app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMK2txTBsCP4eS5o0jJuLxSaL0JMY406VqyJAk1qQ1uEBRuUmqzlULXKEF_yf586suV1lstrXzl2FQM6CHhGsJGNsX4yduYTBZj9yW22fHpqJql7WuLrhvEghlmQ4O0A8JuGfcX43PbPYEU0uiAA6z4aN88i3YBpefEMbb8L5foGmwyVWf2jf2_PIr_lbDi1Stt_x5V738JE5Q0-vtYdBsZrdiEoPaAVKEIJZwTx2eY8rh5uQB7OQbtawvEf05CueB1-GSL7vyZJdz"/>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-error border-2 border-surface rounded-full"></div>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-[18px] text-on-surface">Sarah Jenkins</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant/70">ID: STU-7740</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Student Card 4 -->
+<div class="glass-card p-4 rounded-lg flex items-center gap-4 hover:scale-[1.02] active:opacity-80 active:scale-95 transition-all cursor-pointer" onclick="openDetails('David Kim', 'STU-6512', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&amp;fit=crop&amp;q=80&amp;w=150')">
+<div class="relative">
+<img alt="Student" class="w-16 h-16 rounded-full object-cover border-2 border-mint-green/30" data-alt="A clean-cut portrait of a young man against a minimalist dark grey backdrop. The lighting is sophisticated, creating a subtle rim light that separates the subject from the background. This image conveys the precision and technological focus of a high-end biometric security application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6iw5BF1NzJ39xN7a46PPujN76iONH9xsqWGLgP6L1pT20s4YQSJV5ffcEEV9QDGxLJSmjbe454rxe_sSDza1zcq6Im9AEARXOoHgntsxCkbR4rFDrA8P3DQXiNKdRAEILqG-IpHt1FG_7-cL8oqZSwLZuFxbvM_RVMwBuCZYuPO8SBypj10pncI-pCLWzku7iMh2NurW_NUWoS2vvh2iuOjUGQaSqb5vE3GRO0mnaJg2m4fSTU3zfklIjD_Apgy5zULq2t3UlTVvP"/>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-mint-green border-2 border-surface rounded-full"></div>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-[18px] text-on-surface">David Kim</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant/70">ID: STU-6512</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</main>
+<!-- Student Details Modal (Part of Screen Layout) -->
+<div class="fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-container-margin opacity-0 pointer-events-none transition-all duration-300" id="student-modal">
+<div class="absolute inset-0 bg-bg-deep/80 backdrop-blur-xl" onclick="closeDetails()"></div>
+<div class="relative w-full max-w-md glass-card rounded-t-xl sm:rounded-xl overflow-hidden inner-glow transform translate-y-full transition-transform duration-300 ease-out" id="modal-content">
+<!-- Header/Hero -->
+<div class="h-32 bg-gradient-to-br from-electric-blue/20 to-tertiary/20 relative">
+<button class="absolute top-4 right-4 bg-surface/40 backdrop-blur-md rounded-full p-2 text-on-surface" onclick="closeDetails()">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<div class="px-container-margin -mt-12 pb-8">
+<div class="flex justify-between items-end mb-6">
+<div class="relative">
+<div class="w-24 h-24 rounded-full border-4 border-surface overflow-hidden shadow-lg bg-surface">
+<img alt="Student Profile" class="w-full h-full object-cover" id="modal-img" src=""/>
+</div>
+<div class="absolute inset-0 rounded-full border border-mint-green pointer-events-none"></div>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary-container text-on-primary-container p-3 rounded-xl flex items-center justify-center shadow-lg shadow-electric-blue/20 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="glass-card p-3 rounded-xl flex items-center justify-center active:scale-95 transition-all text-status-critical">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile text-on-surface mb-1" id="modal-name"></h2>
+<p class="font-label-sm text-label-sm text-mint-green mb-stack-lg" id="modal-id"></p>
+<div class="grid grid-cols-2 gap-stack-md">
+<div class="glass-card p-4 rounded-lg bg-surface-container-low/50">
+<p class="font-label-xs text-label-xs text-on-surface-variant/60 uppercase mb-1">Attendance</p>
+<p class="font-headline-md text-[20px] text-on-surface">94.2%</p>
+</div>
+<div class="glass-card p-4 rounded-lg bg-surface-container-low/50">
+<p class="font-label-xs text-label-xs text-on-surface-variant/60 uppercase mb-1">Status</p>
+<p class="font-headline-md text-[20px] text-mint-green">Active</p>
+</div>
+</div>
+<div class="mt-stack-lg">
+<h4 class="font-label-sm text-label-sm text-on-surface-variant/60 uppercase mb-3">Biometric Records</h4>
+<div class="space-y-stack-sm">
+<div class="flex items-center justify-between p-3 glass-card rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-electric-blue" data-icon="face">face</span>
+<span class="font-body-md text-on-surface">Face Scan #1</span>
+</div>
+<span class="font-label-xs text-on-surface-variant/40">Registered Oct 12</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-glass-surface backdrop-blur-xl border-t border-glass-border shadow-lg shadow-electric-blue/10 rounded-t-lg">
+<div class="flex justify-around items-center h-20 px-4 pb-safe w-full max-w-md mx-auto">
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:text-electric-blue transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="face_recognition">face_unlock</span>
+<span class="font-label-xs text-label-xs mt-1">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:text-electric-blue transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-xs text-label-xs mt-1">Records</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:text-electric-blue transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard_customize">dashboard_customize</span>
+<span class="font-label-xs text-label-xs mt-1">Admin</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-mint-green rounded-xl px-3 py-1 scale-110 transition-transform duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="group" data-weight="fill" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-xs text-label-xs mt-1">Users</span>
+</a>
+</div>
+</nav>
+<script>
+        function openDetails(name, id, img) {
+            const modal = document.getElementById('student-modal');
+            const content = document.getElementById('modal-content');
+            
+            document.getElementById('modal-name').textContent = name;
+            document.getElementById('modal-id').textContent = id;
+            document.getElementById('modal-img').src = img;
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('translate-y-full');
+        }
+
+        function closeDetails() {
+            const modal = document.getElementById('student-modal');
+            const content = document.getElementById('modal-content');
+            
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            content.classList.add('translate-y-full');
+        }
+
+        // Search highlight effect
+        const searchInput = document.querySelector('input');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.02]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.02]');
+        });
+    </script>
+</body></html>
