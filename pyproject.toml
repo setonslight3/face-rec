@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "attendance-system"
+version = "0.1.0"
+description = "Face recognition attendance system"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11, <3.13"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
