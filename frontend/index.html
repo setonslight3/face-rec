@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+  <title>VisionGuard | Face Recognition Attendance</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  
+  <style>
+    @keyframes scan {
+      0% { top: 0%; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+    .scan-line {
+      animation: scan 3s linear infinite;
+      background: linear-gradient(to bottom, transparent, #00F5A0, transparent);
+      height: 4px;
+      box-shadow: 0 0 15px #00F5A0;
+    }
+    .glass-inner-glow {
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    }
+    .bg-mesh {
+      background-color: #020617;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(46, 91, 255, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 245, 160, 0.1) 0px, transparent 50%);
+    }
+    .radial-progress {
+      background: radial-gradient(closest-side, #0b1326 79%, transparent 80% 100%),
+                  conic-gradient(#00F5A0 94.2%, #131b2e 0);
+    }
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed-dim": "#00e293",
+            "surface-container-low": "#131b2e",
+            "on-secondary-fixed-variant": "#005232",
+            "on-primary": "#002388",
+            "glass-surface": "rgba(30, 41, 59, 0.7)",
+            "tertiary-fixed-dim": "#d1bcff",
+            "mint-green": "#00F5A0",
+            "surface-container-highest": "#2d3449",
+            "inverse-on-surface": "#283044",
+            "on-tertiary": "#3c0090",
+            "surface": "#0b1326",
+            "secondary": "#ceffdf",
+            "primary-container": "#2e5bff",
+            "inverse-primary": "#124af0",
+            "bg-deep": "#020617",
+            "surface-container-high": "#222a3d",
+            "status-critical": "#FF4B4B",
+            "on-primary-fixed-variant": "#0035be",
+            "error": "#ffb4ab",
+            "primary-fixed-dim": "#b8c3ff",
+            "on-secondary-container": "#006b43",
+            "tertiary-container": "#803eff",
+            "primary": "#b8c3ff",
+            "on-error-container": "#ffdad6",
+            "glass-border": "rgba(255, 255, 255, 0.1)",
+            "surface-container": "#171f33",
+            "error-container": "#93000a",
+            "on-tertiary-fixed": "#23005b",
+            "electric-blue": "#2E5BFF",
+            "surface-tint": "#b8c3ff",
+            "outline-variant": "#434656",
+            "outline": "#8e90a2",
+            "on-tertiary-fixed-variant": "#5700c9",
+            "on-background": "#dae2fd",
+            "secondary-container": "#01f5a0",
+            "on-secondary-fixed": "#002111",
+            "inverse-surface": "#dae2fd",
+            "surface-dim": "#0b1326",
+            "on-surface": "#dae2fd",
+            "background": "#0b1326",
+            "on-surface-variant": "#c4c5d9",
+            "on-tertiary-container": "#f5edff",
+            "on-primary-container": "#efefff",
+            "secondary-fixed": "#50ffaf",
+            "on-primary-fixed": "#001356",
+            "surface-container-lowest": "#060e20",
+            "on-secondary": "#003921",
+            "tertiary-fixed": "#e9ddff",
+            "tertiary": "#d1bcff",
+            "surface-bright": "#31394d",
+            "primary-fixed": "#dde1ff",
+            "surface-variant": "#2d3449",
+            "on-error": "#690005"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "stack-md": "16px",
+            "gutter": "16px",
+            "container-margin": "24px",
+            "stack-sm": "8px",
+            "stack-lg": "32px",
+            "section-gap": "48px"
+          },
+          "fontFamily": {
+            "headline-md": ["Hanken Grotesk"],
+            "label-sm": ["JetBrains Mono"],
+            "label-xs": ["JetBrains Mono"],
+            "body-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-lg": ["Hanken Grotesk"],
+            "headline-lg-mobile": ["Hanken Grotesk"],
+            "display-lg": ["Hanken Grotesk"]
+          },
+          "fontSize": {
+            "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+            "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500"}],
+            "label-xs": ["10px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+            "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-mesh text-on-background min-h-screen font-body-md overflow-x-hidden">
+
+  <!-- Top App Bar -->
+  <header class="fixed top-0 w-full z-50 bg-glass-surface backdrop-blur-md border-b border-glass-border shadow-sm">
+    <div class="flex justify-between items-center px-container-margin py-4 w-full max-w-md mx-auto">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-electric-blue">fingerprint</span>
+        <h1 class="font-headline-md text-headline-md-mobile font-bold text-mint-green">VisionGuard</h1>
+      </div>
+      <div class="w-10 h-10 rounded-full border border-glass-border overflow-hidden bg-surface-container-highest flex items-center justify-center">
+        <span class="material-symbols-outlined text-2xl text-on-surface-variant">admin_panel_settings</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="pt-24 pb-32 px-container-margin max-w-md mx-auto">
+    
+    <!-- 1. Mark Attendance Tab (Scan) -->
+    <div id="attendance-tab" class="tab-pane active space-y-stack-lg">
+      <div class="w-full mb-stack-lg text-center">
+        <h2 class="font-headline-lg-mobile text-headline-lg-mobile mb-2">Ready to Scan</h2>
+        <p class="font-body-md text-on-surface-variant/80">Position your face within the frame</p>
+      </div>
+
+      <div class="relative w-full aspect-square max-w-[320px] mx-auto rounded-lg border-2 border-glass-border overflow-hidden glass-inner-glow bg-surface-container-lowest mb-stack-lg">
+        <video id="video" class="w-full h-full object-cover" autoplay playsinline></video>
+        <canvas id="canvas" class="hidden"></canvas>
+        
+        <div class="absolute inset-0 pointer-events-none">
+          <div class="scan-line absolute left-0 right-0 z-10"></div>
+        </div>
+        
+        <div class="absolute top-6 left-6 w-8 h-8 border-t-4 border-l-4 border-mint-green rounded-tl-sm shadow-[0_0_10px_rgba(0,245,160,0.5)]"></div>
+        <div class="absolute top-6 right-6 w-8 h-8 border-t-4 border-r-4 border-mint-green rounded-tr-sm shadow-[0_0_10px_rgba(0,245,160,0.5)]"></div>
+        <div class="absolute bottom-6 left-6 w-8 h-8 border-b-4 border-l-4 border-mint-green rounded-bl-sm shadow-[0_0_10px_rgba(0,245,160,0.5)]"></div>
+        <div class="absolute bottom-6 right-6 w-8 h-8 border-b-4 border-r-4 border-mint-green rounded-br-sm shadow-[0_0_10px_rgba(0,245,160,0.5)]"></div>
+        
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="w-48 h-48 border border-white/20 rounded-full animate-pulse flex items-center justify-center">
+            <div class="w-44 h-44 border border-white/10 rounded-full"></div>
+          </div>
+        </div>
+      </div>
+
+      <button class="w-full h-14 bg-gradient-to-r from-electric-blue to-tertiary-container text-white font-headline-md rounded-xl shadow-[0_0_26px_rgba(46,91,255,0.25)] active:scale-95 transition-all duration-200 flex items-center justify-center gap-3" onclick="captureAndMark()">
+        <span class="material-symbols-outlined">face_unlock</span>
+        Scan Face
+      </button>
+      
+      <div id="attendance-result" class="p-4 rounded-lg bg-glass-surface backdrop-blur-xl border border-glass-border glass-inner-glow"></div>
+
+      <section class="w-full">
+        <div class="flex justify-between items-center mb-stack-md">
+          <h3 class="font-headline-md text-headline-md-mobile text-on-surface">Recent Activity</h3>
+          <span class="font-label-sm text-electric-blue">View All</span>
+        </div>
+        <div id="recent-activity" class="space-y-stack-md"></div>
+      </section>
+    </div>
+
+
+    <!-- 2. Register Student Tab -->
+    <div id="register-tab" class="tab-pane hidden space-y-stack-lg">
+      <div class="w-full mb-stack-lg text-center">
+        <h2 class="font-headline-lg-mobile text-headline-lg-mobile mb-2">Register Student</h2>
+        <p class="font-body-md text-on-surface-variant/80">Add a new student to the system</p>
+      </div>
+
+      <div class="space-y-stack-md">
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50">badge</span>
+          <input type="text" id="student-id" placeholder="Student ID" class="w-full bg-glass-surface border border-glass-border rounded-xl py-3.5 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-electric-blue focus:ring-1 focus:ring-electric-blue/50 transition-all font-body-md">
+        </div>
+        
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50">person</span>
+          <input type="text" id="student-name" placeholder="Student Name" class="w-full bg-glass-surface border border-glass-border rounded-xl py-3.5 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-electric-blue focus:ring-1 focus:ring-electric-blue/50 transition-all font-body-md">
+        </div>
+        
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50">mail</span>
+          <input type="email" id="student-email" placeholder="Email (optional)" class="w-full bg-glass-surface border border-glass-border rounded-xl py-3.5 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-electric-blue focus:ring-1 focus:ring-electric-blue/50 transition-all font-body-md">
+        </div>
+
+        <div class="p-4 rounded-lg bg-glass-surface backdrop-blur-xl border border-glass-border">
+          <h4 class="font-label-sm text-on-surface-variant uppercase mb-3">Select Courses</h4>
+          <div id="courses-checkboxes" class="space-y-2"></div>
+        </div>
+      </div>
+
+      <div class="relative w-full aspect-video max-w-[320px] mx-auto rounded-lg border-2 border-glass-border overflow-hidden bg-surface-container-lowest mb-stack-lg">
+        <video id="register-video" class="w-full h-full object-cover" autoplay playsinline></video>
+      </div>
+      
+      <div class="flex gap-3">
+        <button class="flex-1 h-12 bg-glass-surface text-on-surface font-headline-md rounded-xl border border-glass-border active:scale-95 transition-all duration-200 flex items-center justify-center gap-2" onclick="captureForRegistration()">
+          <span class="material-symbols-outlined">camera_alt</span>
+          Capture Photo
+        </button>
+        
+        <button id="register-btn" class="flex-1 h-12 bg-gradient-to-r from-electric-blue to-tertiary-container text-white font-headline-md rounded-xl active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 hidden" onclick="registerStudent()">
+          <span class="material-symbols-outlined">person_add</span>
+          Register
+        </button>
+      </div>
+
+      <div id="register-result" class="p-4 rounded-lg bg-glass-surface backdrop-blur-xl border border-glass-border glass-inner-glow"></div>
+    </div>
+
+
+    <!-- 3. Attendance Records Tab -->
+    <div id="records-tab" class="tab-pane hidden space-y-stack-lg">
+      <section class="space-y-gutter">
+        <div class="p-6 rounded-lg bg-glass-surface backdrop-blur-xl border border-glass-border space-y-gutter">
+          <div class="flex items-center justify-between">
+            <h2 class="font-headline-md text-headline-md-mobile text-on-surface">Daily Summary</h2>
+            <input type="date" id="attendance-date" class="bg-surface-container border border-glass-border rounded-lg px-3 py-1 text-on-surface font-label-sm">
+          </div>
+          <div class="flex items-center gap-6">
+            <div class="relative w-32 h-32 flex-shrink-0">
+              <div class="radial-progress w-full h-full rounded-full flex items-center justify-center">
+                <div class="text-center">
+                  <span class="block font-headline-md text-headline-md text-mint-green" id="summary-rate">0%</span>
+                  <span class="block font-label-xs text-label-xs text-on-surface-variant uppercase">Rate</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex-1 space-y-stack-sm">
+              <div class="p-3 rounded-lg bg-primary-container/10 border-none">
+                <span class="block font-label-xs text-label-xs text-on-surface-variant">OVERALL</span>
+                <span class="font-headline-md text-headline-md text-electric-blue">Attendance</span>
+              </div>
+              <div class="flex gap-2">
+                <div class="flex-1 p-2 rounded-lg bg-surface-container-low border border-glass-border">
+                  <span class="block font-label-xs text-label-xs text-on-surface-variant">PRESENT</span>
+                  <span class="text-mint-green flex items-center gap-1 font-label-sm" id="summary-present">0</span>
+                </div>
+                <div class="flex-1 p-2 rounded-lg bg-surface-container-low border border-glass-border">
+                  <span class="block font-label-xs text-label-xs text-on-surface-variant">ABSENT</span>
+                  <span class="text-status-critical flex items-center gap-1 font-label-sm" id="summary-absent">0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="space-y-stack-md">
+        <div class="flex items-center justify-between">
+          <h3 class="font-headline-md text-headline-md-mobile text-on-surface">Recent Logs</h3>
+          <select id="records-course-filter" class="bg-glass-surface border border-glass-border rounded-lg px-3 py-1 text-on-surface font-label-sm">
+            <option value="">All Courses</option>
+          </select>
+        </div>
+        <div id="records-list" class="space-y-3"></div>
+      </section>
+    </div>
+
+
+    <!-- 4. Manage Students Tab -->
+    <div id="manage-tab" class="tab-pane hidden space-y-stack-lg">
+      <div class="flex gap-stack-md mb-stack-lg">
+        <div class="relative flex-grow">
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50">search</span>
+          <input id="student-search" class="w-full bg-glass-surface border border-glass-border rounded-xl py-3.5 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-electric-blue focus:ring-1 focus:ring-electric-blue/50 transition-all font-body-md" placeholder="Search students...">
+        </div>
+      </div>
+
+      <div id="students-list" class="space-y-stack-md"></div>
+    </div>
+
+
+    <!-- 5. Admin Dashboard Tab -->
+    <div id="admin-tab" class="tab-pane hidden space-y-stack-lg">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-headline-md text-headline-md-mobile text-on-surface">Admin Dashboard</h2>
+        <button onclick="showCourseForm()" class="p-3 rounded-lg bg-primary-container text-white flex items-center justify-center shadow-lg shadow-electric-blue/20 active:scale-95 transition-all">
+          <span class="material-symbols-outlined">add</span>
+        </button>
+      </div>
+
+      <div id="course-form" class="p-4 rounded-lg bg-glass-surface backdrop-blur-xl border border-glass-border hidden space-y-3">
+        <h3 id="form-title" class="font-headline-md">Add New Course</h3>
+        <input type="text" id="course-name" placeholder="Course Name" class="w-full bg-surface-container border border-glass-border rounded-lg py-2 px-3 text-on-surface placeholder:text-on-surface-variant/40">
+        <input type="text" id="course-code" placeholder="Course Code" class="w-full bg-surface-container border border-glass-border rounded-lg py-2 px-3 text-on-surface placeholder:text-on-surface-variant/40">
+        <input type="text" id="course-instructor" placeholder="Instructor Name" class="w-full bg-surface-container border border-glass-border rounded-lg py-2 px-3 text-on-surface placeholder:text-on-surface-variant/40">
+        
+        <div class="flex gap-3">
+          <button onclick="saveCourse()" class="flex-1 h-10 bg-gradient-to-r from-electric-blue to-tertiary-container text-white rounded-lg active:scale-95 transition-all">Save</button>
+          <button onclick="cancelCourseForm()" class="flex-1 h-10 bg-surface-container border border-glass-border text-on-surface rounded-lg active:scale-95 transition-all">Cancel</button>
+        </div>
+      </div>
+
+      <div id="courses-list" class="space-y-stack-md"></div>
+    </div>
+
+
+    <!-- 6. Statistics Tab -->
+    <div id="stats-tab" class="tab-pane hidden space-y-stack-lg">
+      <h2 class="font-headline-md text-headline-md-mobile text-on-surface mb-4">Attendance Statistics</h2>
+      
+      <div class="grid grid-cols-2 gap-stack-md">
+        <div class="p-4 rounded-lg bg-glass-surface backdrop-blur-xl border border-glass-border">
+          <span class="block font-label-xs text-label-xs text-on-surface-variant">ATTENDANCE</span>
+          <span class="font-headline-md text-headline-md text-mint-green" id="stat-overall">-</span>
+        </div>
+        <div class="p-4 rounded-lg bg-glass-surface backdrop-blur-xl border border-glass-border">
+          <span class="block font-label-xs text-label-xs text-on-surface-variant">TOP COURSE</span>
+          <span class="font-headline-md text-headline-md text-electric-blue" id="stat-top">-</span>
+        </div>
+        <div class="p-4 rounded-lg bg-glass-surface backdrop-blur-xl border border-glass-border">
+          <span class="block font-label-xs text-label-xs text-on-surface-variant">PRESENT</span>
+          <span class="font-headline-md text-headline-md text-on-surface" id="stat-present">-</span>
+        </div>
+        <div class="p-4 rounded-lg bg-glass-surface backdrop-blur-xl border border-glass-border">
+          <span class="block font-label-xs text-label-xs text-on-surface-variant">ABSENT</span>
+          <span class="font-headline-md text-headline-md text-on-surface" id="stat-absent">-</span>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-lg bg-glass-surface backdrop-blur-xl border border-glass-border">
+        <h3 class="font-label-sm text-on-surface-variant uppercase mb-3">Top Attendees</h3>
+        <div id="stat-ranking" class="space-y-2"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="fixed bottom-0 w-full z-50 bg-glass-surface backdrop-blur-xl border-t border-glass-border rounded-t-xl shadow-lg shadow-electric-blue/10">
+    <div class="flex justify-around items-center h-20 px-4 pb-safe w-full max-w-md mx-auto">
+      <button class="nav-btn active flex flex-col items-center justify-center" data-tab="attendance">
+        <span class="material-symbols-outlined">face_unlock</span>
+        <span class="font-label-xs text-label-xs mt-1">Scan</span>
+      </button>
+      <button class="nav-btn flex flex-col items-center justify-center" data-tab="register">
+        <span class="material-symbols-outlined">person_add</span>
+        <span class="font-label-xs text-label-xs mt-1">Register</span>
+      </button>
+      <button class="nav-btn flex flex-col items-center justify-center" data-tab="records">
+        <span class="material-symbols-outlined">calendar_today</span>
+        <span class="font-label-xs text-label-xs mt-1">Records</span>
+      </button>
+      <button class="nav-btn flex flex-col items-center justify-center" data-tab="manage">
+        <span class="material-symbols-outlined">group</span>
+        <span class="font-label-xs text-label-xs mt-1">Users</span>
+      </button>
+      <button class="nav-btn flex flex-col items-center justify-center" data-tab="admin">
+        <span class="material-symbols-outlined">dashboard_customize</span>
+        <span class="font-label-xs text-label-xs mt-1">Admin</span>
+      </button>
+      <button class="nav-btn flex flex-col items-center justify-center" data-tab="stats">
+        <span class="material-symbols-outlined">analytics</span>
+        <span class="font-label-xs text-label-xs mt-1">Stats</span>
+      </button>
+    </div>
+  </nav>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

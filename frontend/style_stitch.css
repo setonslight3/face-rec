@@ -1,0 +1,109 @@
+/* Stitch: Modern Professional Frontend Redesign (local lightweight CSS)
+   Note: The provided Stitch design uses Tailwind. This file provides a small subset
+   so we can apply its visual language without reworking the entire HTML.
+*/
+
+:root {
+  --st-bg: #020617;
+  --st-surface: rgba(30, 41, 59, 0.55);
+  --st-surface-2: rgba(19, 27, 46, 0.9);
+  --st-border: rgba(255, 255, 255, 0.1);
+  --st-mint: #00F5A0;
+  --st-blue: #2E5BFF;
+  --st-purple: #803eff;
+  --st-text: #dae2fd;
+  --st-muted: rgba(218, 226, 253, 0.7);
+  --st-radius-xl: 22px;
+  --st-radius-lg: 16px;
+  --st-radius-md: 12px;
+}
+
+body {
+  background: radial-gradient(1200px circle at 10% 10%, rgba(46,91,255,0.18) 0%, rgba(2,6,23,0) 40%),
+    linear-gradient(135deg, var(--st-bg) 0%, #020b22 100%);
+  color: var(--st-text);
+}
+
+.container {
+  background: rgba(2, 6, 23, 0.72) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 0 0 1px rgba(46,91,255,0.12), 0 16px 60px rgba(0,0,0,0.35);
+}
+
+header {
+  background: linear-gradient(135deg, rgba(46,91,255,0.55) 0%, rgba(128,62,255,0.35) 100%) !important;
+}
+
+.tabs {
+  background: rgba(11, 19, 38, 0.5) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+.tab-btn {
+  color: rgba(218, 226, 253, 0.78) !important;
+}
+
+.tab-btn.active {
+  background: rgba(46, 91, 255, 0.15) !important;
+  color: var(--st-mint) !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, rgba(46,91,255,1) 0%, rgba(128,62,255,1) 100%) !important;
+  box-shadow: 0 0 26px rgba(46,91,255,0.25);
+}
+
+.btn-secondary {
+  background: rgba(0, 245, 160, 0.92) !important;
+  box-shadow: 0 0 26px rgba(0,245,160,0.18);
+}
+
+.input-field {
+  background: rgba(11, 19, 38, 0.7) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  color: var(--st-text) !important;
+}
+
+.input-field::placeholder { color: rgba(218,226,253,0.45); }
+
+.result-box {
+  background: rgba(30, 41, 59, 0.45) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+.table-container table { background: rgba(11, 19, 38, 0.3); }
+
+th {
+  background: linear-gradient(135deg, rgba(46,91,255,0.95) 0%, rgba(128,62,255,0.8) 100%) !important;
+}
+
+tbody tr:nth-child(even) { background: rgba(46,91,255,0.06) !important; }
+
+.present { color: var(--st-mint) !important; }
+.absent { color: #ff6b6b !important; }
+
+.modal-content {
+  background: rgba(11, 19, 38, 0.75) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+.student-card,
+.course-card,
+.course-form,
+.attendance-trend,
+.student-ranking,
+.modal-content {
+  border-radius: var(--st-radius-xl) !important;
+}
+
+.student-card {
+  background: rgba(30, 41, 59, 0.35) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
